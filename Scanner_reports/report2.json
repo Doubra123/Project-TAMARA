@@ -1,0 +1,7 @@
+[
+  {
+    "vulnerabilityTitle": "PAN-OS GlobalProtect Authentication Bypass",
+    "cveId": "CVE-2026-20183",
+    "severity": "High"
+  }
+]

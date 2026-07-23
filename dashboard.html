@@ -31,55 +31,65 @@
     <link rel="stylesheet" href="css/vendors/simplebar.css" />
     <!-- Main styles for this application-->
     <link href="css/style.css" rel="stylesheet" />
+    
     <!-- We use those styles to show code examples, you should remove them in your application.-->
     <link href="css/examples.css" rel="stylesheet" />
     <script src="js/config.js"></script>
     <script src="js/color-modes.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   </head>
   <body>
     <div class="sidebar sidebar-dark sidebar-fixed border-end" id="sidebar">
-      <div class="sidebar-header border-bottom">
-        <div class="sidebar-brand me-auto">
-          <span
-            style="
-              font-size: 1.2rem;
-              font-weight: 700;
-              color: #fff;
-              letter-spacing: 1px;
-            "
-            >TAMARA GATEWAY</span
-          >
-        </div>
-        <button
-          class="btn-close d-lg-none"
-          type="button"
-          data-coreui-theme="dark"
-          aria-label="Close"
-          onclick="
-            coreui.Sidebar.getInstance(
-              document.querySelector('#sidebar'),
-            ).toggle()
-          "
-        ></button>
-      </div>
-      <ul class="sidebar-nav" data-coreui="navigation" data-simplebar>
-        <li class="nav-item">
-          <a class="nav-link active" href="dashboard.html">
-            <svg
-              class="nav-icon"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 512"
-            >
-              <path
-                fill="var(--ci-primary-color, currentColor)"
-                d="M425.706 142.294A240 240 0 0 0 16 312v88h144v-32H48v-56h32v-32H48v-40h32v-32H48v-40h32v-32H48v-8.833A208 208 0 0 1 208 48v32h32V48h40v32h32V48h40v32h32V48h8.833M256 464a208 208 0 0 1-144-55.706V392h32v-32h-32v-40h32v-32h-32v-40h32v-32h-32v-8.833A208 208 0 0 1 464 256c0 28.833 13.8 54.141 35.294 69.183 144.135a64.141 64.141 0 1 1 32-32 32.036 32.036 0 0 0 1-32 32"
-                class="ci-primary"
-              />
-            </svg>
-            Overview Dashboard
-          </a>
-        </li>
-      </ul>
+      <div class="sidebar-header border-bottom d-flex align-items-center justify-content-between p-3">
+    <span class="fw-bold text-white fs-5">TAMARA GATEWAY</span>
+    <div class="live-indicator">
+      <span class="pulsing-dot"></span>
+      <span>SYSTEM LIVE</span>
+    </div>
+    <button class="btn-close d-lg-none" type="button" data-coreui-theme="dark" aria-label="Close" onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()"></button>
+  </div>
+   <ul class="sidebar-nav" data-coreui="navigation" data-simplebar>
+    <li class="nav-title">MAIN NAVIGATION</li>
+    
+    <li class="nav-item">
+      <a class="nav-link active" href="dashboard.html">
+        <svg class="nav-icon"><use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use></svg>
+        Overview Dashboard
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="javascript:void(0)" onclick="document.getElementById('upload-section')?.scrollIntoView({behavior: 'smooth'})">
+        <svg class="nav-icon"><use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-cloud-upload"></use></svg>
+        Upload & Scan
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="javascript:void(0)" onclick="document.getElementById('vulnerabilities-table')?.scrollIntoView({behavior: 'smooth'})">
+        <svg class="nav-icon"><use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-shield-alt"></use></svg>
+        Host Vulnerabilities
+      </a>
+    </li>
+
+    <li class="nav-title">ANALYTICS & REPORTS</li>
+
+    <li class="nav-item">
+      <a class="nav-link" id="exportPdfBtn" href="javascript:void(0)">
+        <svg class="nav-icon"><use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-description"></use></svg>
+        Export PDF Report
+      </a>
+    </li>
+
+    <li class="nav-title">SYSTEM CONTROL</li>
+
+    <li class="nav-item">
+      <a class="nav-link text-danger" href="index.html">
+        <svg class="nav-icon"><use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use></svg>
+        Logout
+      </a>
+    </li>
+</ul>
       <!-- End of sidebar-->
       <div class="sidebar-footer border-top d-none d-md-flex">
         <button
@@ -448,18 +458,28 @@
             </li>
           </ul>
         </div>
-        <div class="container-fluid px-4">
+       <div class="container-fluid px-4 d-flex justify-content-between align-items-center">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb my-0">
               <li class="breadcrumb-item active"><span>Home</span></li>
             </ol>
           </nav>
+          <!-- Export PDF Button -->
+ <!-- Action Buttons Group -->
+<div class="d-flex align-items-center gap-2">
+  <button id="export-pdf-btn" class="btn btn-primary btn-sm" onclick="exportExecutiveSummary()">
+    Export PDF
+  </button>
+  <button class="btn btn-outline-danger btn-sm" onclick="clearReport()">
+    Clear Report
+  </button>
+</div>
         </div>
       </header>
       <div class="body flex-grow-1">
         <div class="container-lg px-4">
           <!-- Search Bar Component -->
-          <div class="row mb-3">
+          <div class="row mb-3 justify-content-center">
             <div class="col-md-6">
               <div class="input-group">
                 <span class="input-group-text bg-light"
@@ -475,6 +495,49 @@
             </div>
           </div>
           <!-- The metric card-->
+          <!-- REPORT METADATA & GLOBAL RISK SCORE (Bigger & Prominent) -->
+          <div class="row align-items-center mb-4">
+            <!-- Left Side: File Name and Live Timestamp -->
+            <div class="col-md-6 mb-3 mb-md-0 text-muted small">
+              <div>
+                <strong>Current Report:</strong>
+                <span id="report-name" class="text-primary fw-semibold"
+                  >No report uploaded</span
+                >
+              </div>
+              <div>
+                <strong>Last Scan:</strong>
+                <span id="scan-timestamp">-- -- ---- • --:--</span>
+              </div>
+            </div>
+
+            <!-- Right Side: Dedicated Prominent Global Risk Score Card -->
+            <div class="col-md-6 d-flex justify-content-md-end">
+              <div
+                class="card border-start border-start-4 border-start-danger px-4 py-3 shadow-sm animate__animated animate__fadeIn"
+                style="
+                  transform: scale(1.05);
+                  min-width: 250px;
+                  background-color: #fdf2f2;
+                  z-index: 2;
+                "
+              >
+                <div
+                  class="text-danger small text-uppercase fw-bold tracking-wider"
+                >
+                  Global Risk Score
+                </div>
+                <div
+                  class="fs-2 fw-bold text-danger mt-1"
+                  id="global-risk-score"
+                >
+                  0%
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- METRICS ROW (The 4 Equal Pillars) -->
           <div class="row mb-4">
             <!-- Total Vulnerabilities Card -->
             <div class="col-6 col-lg-3">
@@ -540,6 +603,21 @@
           </div>
           <!-- ⬆️ END OF METRICS ROW ⬆️ -->
 
+          <!-- Upload Section -->
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title">Upload Vulnerability Report</h5>
+              <div class="input-group">
+                <input
+                  type="file"
+                  class="form-control"
+                  id="vulnerabilityUpload"
+                  accept=".json"
+                />
+              </div>
+            </div>
+          </div>
+
           <!-- Table Wrapper -->
           <div class="table-responsive">
             <table class="table table-hover table-bordered">
@@ -549,17 +627,21 @@
                   <th>Vulnerability Title</th>
                   <th>Severity</th>
                   <th>Status</th>
+                  <th>Assigned To</th>
                   <th>Due Date</th>
                   <th>Action</th>
                   <!-- This is the button to click -->
                 </tr>
               </thead>
               <tbody id="vulnerability-table-body">
-                <tr>
-                  <td>Server-01</td>
+                <tr class="vulnerability-row">
+                  <td><strong>Server-01</strong></td>
                   <td>Weak SSH Config</td>
-                  <td><span class="badge bg-warning">Medium</span></td>
-                  <td>Open</td>
+                  <td>
+                    <span class="badge bg-warning text-dark">Medium</span>
+                  </td>
+                  <td><span class="badge bg-danger text-white">Open</span></td>
+                  <td><strong>Mariana</strong></td>
                   <td>2026-07-20</td>
                   <td>
                     <button
@@ -599,6 +681,7 @@
           </div>
         </div>
       </div>
+
       <footer class="footer px-4">
         <div>
           <span
@@ -634,6 +717,9 @@
       });
     </script>
 
+    <!-- Place this right before the closing </body> tag -->
+    <script src="parser.js"></script>
     <script src="dashboard.js"></script>
+    <script></script>
   </body>
 </html>

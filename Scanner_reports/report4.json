@@ -1,0 +1,7 @@
+[
+  {
+    "vulnerabilityTitle": "Weak SSH Config",
+    "cveId": "CVE-2026-0102",
+    "severity": "Medium"
+  }
+]

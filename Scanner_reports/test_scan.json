@@ -1,0 +1,13 @@
+{
+  "vulnerabilities": [
+    {
+      "assetName": "Server-01",
+      "ipAddress": "192.168.1.10",
+      "vulnerabilityTitle": "SQL Injection",
+      "severity": "Critical",
+      "cveId": "CVE-2026-0001",
+      "status": "Open",
+      "dueDate": "2026-07-30"
+    }
+  ]
+}

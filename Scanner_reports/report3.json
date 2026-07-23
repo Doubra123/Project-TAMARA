@@ -1,0 +1,7 @@
+[
+  {
+    "vulnerabilityTitle": "SQL Injection",
+    "cveId": "CVE-2026-0001",
+    "severity": "Critical"
+  }
+]

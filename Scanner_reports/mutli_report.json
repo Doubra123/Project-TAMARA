@@ -1,0 +1,21 @@
+[
+  {
+    "vulnerabilityTitle": "SD-WAN Controller Authentication Bypass",
+    "cveId": "CVE-2026-20182",
+    "severity": "Critical",
+    "cvss": 10.0
+  },
+  {
+    "vulnerabilityTitle": "PAN-OS GlobalProtect Authentication Bypass",
+    "cveId": "CVE-2026-20183",
+    "severity": "High",
+    "cvss": 8.5
+  },
+  {
+    "vulnerabilityTitle": "Weak SSH Config",
+    "cveId": "CVE-2026-0102",
+    "severity": "Medium",
+    "cvss": 7.0
+
+  }
+]

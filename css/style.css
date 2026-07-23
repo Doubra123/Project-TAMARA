@@ -11,7 +11,7 @@
   --cui-purple: #6f42c1;
   --cui-pink: #d63384;
   --cui-red: #dc3545;
-  --cui-orange: #fd7e14;
+  --cui-orange: #f24e0d;
   --cui-yellow: #ffc107;
   --cui-green: #198754;
   --cui-teal: #20c997;
@@ -14752,3 +14752,45 @@ textarea.form-control-lg {
 }
 
 /*# sourceMappingURL=style.css.map */
+.bg-orange {
+    background-color: #fd7e14 !important;
+}
+/* ==========================================
+   CUSTOM TAMARA LIVE INDICATOR
+   ========================================== */
+.live-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #2ec4b6;
+  background: rgba(46, 196, 182, 0.1);
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(46, 196, 182, 0.3);
+}
+
+.pulsing-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #2ec4b6;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(46, 196, 182, 0.7);
+  animation: pulse-green 1.8s infinite;
+}
+
+@keyframes pulse-green {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(46, 196, 182, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(46, 196, 182, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(46, 196, 182, 0);
+  }
+}

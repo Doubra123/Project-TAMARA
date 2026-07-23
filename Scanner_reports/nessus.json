@@ -1,0 +1,68 @@
+[
+  {
+    "vulnerabilityTitle": "SD-WAN Controller Authentication Bypass",
+    "cveId": "CVE-2026-20182",
+    "severity": "Critical",
+    "cvss": 10.0,
+    "status": "Open",
+    "assetName": "Cisco-SD-WAN-Controller",
+    "ipAddress": "10.0.0.15",
+    "assignedTo": "Robert",
+    "dueDate": "2026-07-14"
+  },
+  {
+    "vulnerabilityTitle": "Unencrypted HTTP Traffic Allowed",
+    "cveId": "CVE-2026-9999",
+    "severity": "Low",
+    "cvss": 2.5,
+    "status": "Open",
+    "assetName": "Staff-Workstation-05",
+    "ipAddress": "10.0.0.55",
+    "assignedTo": "Mercy",
+    "dueDate": "2026-08-14"
+  },
+  {
+    "vulnerabilityTitle": "PAN-OS GlobalProtect Authentication Bypass",
+    "cveId": "CVE-2026-0257",
+    "severity": "High",
+    "cvss": 7.8,
+    "status": "Open",
+    "assetName": "PaloAlto-GlobalProtect-GW",
+    "ipAddress": "10.0.0.22",
+    "assignedTo": "Owens",
+    "dueDate": "2026-07-21"
+  },
+  {
+    "vulnerabilityTitle": "ICMP Timestamp Request Remote Information Disclosure",
+    "cveId": "CVE-2026-1111",
+    "severity": "Low",
+    "cvss": 0.0,
+    "status": "Open",
+    "assetName": "Backup-Server",
+    "ipAddress": "10.0.0.99",
+    "assignedTo": "Unassigned",
+    "dueDate": "2026-09-01"
+  },
+  {
+    "vulnerabilityTitle": "SSH Weak MAC Algorithms Enabled",
+    "cveId": "CVE-2026-2222",
+    "severity": "Medium",
+    "cvss": 4.3,
+    "status": "Open",
+    "assetName": "DMZ-Web-Switch",
+    "ipAddress": "10.0.0.10",
+    "assignedTo": "Unassigned",
+    "dueDate": "2026-08-30"
+  },
+  {
+    "vulnerabilityTitle": "SSL/TLS RC4 Cipher Suites Supported",
+    "cveId": "CVE-2026-8888",
+    "severity": "Medium",
+    "cvss": 4.3,
+    "status": "Open",
+    "assetName": "Legacy-DB-Server",
+    "ipAddress": "10.0.0.40",
+    "assignedTo": "Robert",
+    "dueDate": "2026-07-25"
+  }
+]
