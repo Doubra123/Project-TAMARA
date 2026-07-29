@@ -305,34 +305,39 @@ window.addEventListener('load', () => {
         );
     }
 });
-  function exportExecutiveSummary() {
-  const exportBtn = document.getElementById('exportPdfBtn');
-  const fileName = localStorage.getItem('tamara_fileName') || 'Executive_Summary';
+ function exportExecutiveSummary() {
+    const fileName = localStorage.getItem('tamara_fileName') || 'Executive_Summary';
 
-  // 1. Temporarily hide UI elements we DON'T want in the PDF
-  const elementsToHide = document.querySelectorAll('#exportPdfBtn, .input-group, form, input[type="file"]');
-  elementsToHide.forEach(el => el.style.display = 'none');
+    // 1. Target elements inside the content container to temporarily hide
+    const elementsToHide = document.querySelectorAll('#exportPdfBtn, #clearReportBtn, #upload-section, .input-group, th:last-child, td:last-child');
+    elementsToHide.forEach(el => el.style.display = 'none');
 
-  // 2. Target the main content wrapper
-  const element = document.querySelector('.body.flex-grow-1') || document.body;
+    // 2. Target main body container ONLY (skips navbar/header whitespace)
+    const element = document.querySelector('.container-lg') || document.body;
 
-  const options = {
-    margin:       [0.2, 0.2, 0.2, 0.2], // Crisp thin borders
-    filename:     `${fileName}_Summary.pdf`,
-    image:        { type: 'jpeg', quality: 0.98 },
-    html2canvas:  { scale: 2, useCORS: true, logging: false },
-    jsPDF:        { unit: 'in', format: 'a4', orientation: 'landscape' }, // Landscape fills wide dashboards much better
-    pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
-  };
+    const options = {
+        margin: [0.2, 0.2, 0.2, 0.2],
+        filename: `${fileName}_Summary.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: {
+            scale: 2,
+            useCORS: true,
+            logging: false,
+            backgroundColor: '#0f172a'
+        },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' },
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+    };
 
-  // 3. Generate PDF and restore hidden UI elements afterwards
-  html2pdf().set(options).from(element).save().then(() => {
-    elementsToHide.forEach(el => el.style.display = '');
-  }).catch(err => {
-    console.error(err);
-    elementsToHide.forEach(el => el.style.display = '');
-  });
+    // 3. Render PDF and cleanly restore elements
+    html2pdf().set(options).from(element).save().then(() => {
+        elementsToHide.forEach(el => el.style.display = '');
+    }).catch(err => {
+        console.error('PDF Generation Error:', err);
+        elementsToHide.forEach(el => el.style.display = '');
+    });
 }
+    
 document.addEventListener('DOMContentLoaded', () => {
     const exportBtn = document.getElementById('exportPdfBtn');
     if (exportBtn) {

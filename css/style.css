@@ -14794,3 +14794,88 @@ textarea.form-control-lg {
     box-shadow: 0 0 0 0 rgba(46, 196, 182, 0);
   }
 }
+  /* Dark glassmorphic theme overrides */
+    body {
+      background-color: #0f172a !important;
+      color: #e2e8f0;
+    }
+
+    /* Frosted glass cards */
+    /* NEW - Preserves colored border-left bars */
+.card, .sidebar, .header {
+  background: rgba(15, 23, 42, 0.65) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
+}
+
+    /* Subtle hover light glow on interactive cards */
+    .card:hover {
+      border-color: rgba(56, 189, 248, 0.3) !important;
+      box-shadow: 0 10px 35px 0 rgba(56, 189, 248, 0.15) !important;
+      transition: all 0.3s ease;
+    }
+
+    /* Sidebar nav links style */
+    .sidebar-nav .nav-link {
+      color: #94a3b8 !important;
+    }
+    .sidebar-nav .nav-link.active, 
+    .sidebar-nav .nav-link:hover {
+      color: #38bdf8 !important;
+      background: rgba(56, 189, 248, 0.08) !important;
+    }
+    .position-relative {
+  position: relative;
+}
+
+#togglePassword {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 10;
+}
+/* Forced table row hover highlight */
+.table tbody tr:hover,
+.table tbody tr:hover td {
+  background-color: rgba(56, 189, 248, 0.12) !important;
+  transition: background-color 0.2s ease;
+}
+/* Direct glow override for Export and Clear Report buttons */
+button:hover,
+a.btn:hover,
+.btn:hover {
+  border-color: rgba(56, 189, 248, 0.8) !important;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.4) !important;
+  transform: translateY(-1px);
+  transition: all 0.2s ease-in-out !important;
+}
+/* Header alignment & polish */
+.header, navbar, header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+}
+
+/* Fix right-side header icons and avatar */
+.header-right, .navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* Profile image fallback styling */
+img[alt*="user"], .avatar, .profile-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #1e293b;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}

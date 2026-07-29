@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="css/vendors/simplebar.css" />
     <!-- Main styles for this application-->
     <link href="css/style.css" rel="stylesheet" />
-    
+
     <!-- We use those styles to show code examples, you should remove them in your application.-->
     <link href="css/examples.css" rel="stylesheet" />
     <script src="js/config.js"></script>
@@ -40,56 +40,130 @@
   </head>
   <body>
     <div class="sidebar sidebar-dark sidebar-fixed border-end" id="sidebar">
-      <div class="sidebar-header border-bottom d-flex align-items-center justify-content-between p-3">
-    <span class="fw-bold text-white fs-5">TAMARA GATEWAY</span>
-    <div class="live-indicator">
-      <span class="pulsing-dot"></span>
-      <span>SYSTEM LIVE</span>
-    </div>
-    <button class="btn-close d-lg-none" type="button" data-coreui-theme="dark" aria-label="Close" onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()"></button>
-  </div>
-   <ul class="sidebar-nav" data-coreui="navigation" data-simplebar>
-    <li class="nav-title">MAIN NAVIGATION</li>
-    
-    <li class="nav-item">
-      <a class="nav-link active" href="dashboard.html">
-        <svg class="nav-icon"><use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use></svg>
-        Overview Dashboard
-      </a>
-    </li>
+    <div class="sidebar-header border-bottom d-flex align-items-center justify-content-between px-2 py-3">
+      <div class="d-flex align-items-center gap-1 text-nowrap">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            style="min-width: 24px"
+          >
+            <path
+              d="M12 2L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 2Z"
+              fill="rgba(56, 189, 248, 0.15)"
+              stroke="#38bdf8"
+              stroke-width="2"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M12 6V18M8 10L12 6L16 10"
+              stroke="#38bdf8"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+         <div class="d-flex flex-column lh-1">
+  <span class="fw-bold text-white fs-6">TAMARA</span>
+  <span class="text-info fw-semibold" style="font-size: 1rem; letter-spacing: 0.5px;">GATEWAY</span>
+</div>
+        </div>
+        <div class="live-indicator">
+          <span class="pulsing-dot"></span>
+          <span>SYSTEM LIVE</span>
+        </div>
+        <button
+          class="btn-close d-lg-none"
+          type="button"
+          data-coreui-theme="dark"
+          aria-label="Close"
+          onclick="
+            coreui.Sidebar.getInstance(
+              document.querySelector('#sidebar'),
+            ).toggle()
+          "
+        ></button>
+      </div>
+      <ul class="sidebar-nav" data-coreui="navigation" data-simplebar>
+        <li class="nav-title">MAIN NAVIGATION</li>
 
-    <li class="nav-item">
-      <a class="nav-link" href="javascript:void(0)" onclick="document.getElementById('upload-section')?.scrollIntoView({behavior: 'smooth'})">
-        <svg class="nav-icon"><use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-cloud-upload"></use></svg>
-        Upload & Scan
-      </a>
-    </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="dashboard.html">
+            <svg class="nav-icon">
+              <use
+                xlink:href="vendors/@coreui/icons/svg/free.svg#cil-speedometer"
+              ></use>
+            </svg>
+            Overview Dashboard
+          </a>
+        </li>
 
-    <li class="nav-item">
-      <a class="nav-link" href="javascript:void(0)" onclick="document.getElementById('vulnerabilities-table')?.scrollIntoView({behavior: 'smooth'})">
-        <svg class="nav-icon"><use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-shield-alt"></use></svg>
-        Host Vulnerabilities
-      </a>
-    </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="javascript:void(0)"
+            onclick="
+              document
+                .getElementById('upload-section')
+                ?.scrollIntoView({ behavior: 'smooth' })
+            "
+          >
+            <svg class="nav-icon">
+              <use
+                xlink:href="vendors/@coreui/icons/svg/free.svg#cil-cloud-upload"
+              ></use>
+            </svg>
+            Upload & Scan
+          </a>
+        </li>
 
-    <li class="nav-title">ANALYTICS & REPORTS</li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="javascript:void(0)"
+            onclick="
+              document
+                .getElementById('vulnerabilities-table')
+                ?.scrollIntoView({ behavior: 'smooth' })
+            "
+          >
+            <svg class="nav-icon">
+              <use
+                xlink:href="vendors/@coreui/icons/svg/free.svg#cil-shield-alt"
+              ></use>
+            </svg>
+            Host Vulnerabilities
+          </a>
+        </li>
 
-    <li class="nav-item">
-      <a class="nav-link" id="exportPdfBtn" href="javascript:void(0)">
-        <svg class="nav-icon"><use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-description"></use></svg>
-        Export PDF Report
-      </a>
-    </li>
+        <li class="nav-title">ANALYTICS & REPORTS</li>
 
-    <li class="nav-title">SYSTEM CONTROL</li>
+        <li class="nav-item">
+          <a class="nav-link" id="exportPdfBtn" href="javascript:void(0)">
+            <svg class="nav-icon">
+              <use
+                xlink:href="vendors/@coreui/icons/svg/free.svg#cil-description"
+              ></use>
+            </svg>
+            Export PDF Report
+          </a>
+        </li>
 
-    <li class="nav-item">
-      <a class="nav-link text-danger" href="index.html">
-        <svg class="nav-icon"><use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use></svg>
-        Logout
-      </a>
-    </li>
-</ul>
+        <li class="nav-title">SYSTEM CONTROL</li>
+
+        <li class="nav-item">
+          <a class="nav-link text-danger" href="index.html">
+            <svg class="nav-icon">
+              <use
+                xlink:href="vendors/@coreui/icons/svg/free.svg#cil-account-logout"
+              ></use>
+            </svg>
+            Logout
+          </a>
+        </li>
+      </ul>
       <!-- End of sidebar-->
       <div class="sidebar-footer border-top d-none d-md-flex">
         <button
@@ -275,8 +349,8 @@
                 <div class="avatar avatar-md">
                   <img
                     class="avatar-img"
-                    src="assets/img/avatars/8.jpg"
-                    alt="user@email.com"
+                    src="https://ui-avatars.com/api/?name=Tamara+Admin&background=0f172a&color=38bdf8&bold=true"
+                    alt="Tamara Admin Profile"
                   />
                 </div>
               </a>
@@ -458,22 +532,31 @@
             </li>
           </ul>
         </div>
-       <div class="container-fluid px-4 d-flex justify-content-between align-items-center">
+        <div
+          class="container-fluid px-4 d-flex justify-content-between align-items-center"
+        >
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb my-0">
               <li class="breadcrumb-item active"><span>Home</span></li>
             </ol>
           </nav>
           <!-- Export PDF Button -->
- <!-- Action Buttons Group -->
-<div class="d-flex align-items-center gap-2">
-  <button id="export-pdf-btn" class="btn btn-primary btn-sm" onclick="exportExecutiveSummary()">
-    Export PDF
-  </button>
-  <button class="btn btn-outline-danger btn-sm" onclick="clearReport()">
-    Clear Report
-  </button>
-</div>
+          <!-- Action Buttons Group -->
+          <div class="d-flex align-items-center gap-2">
+            <button
+              id="export-pdf-btn"
+              class="btn btn-primary btn-sm"
+              onclick="exportExecutiveSummary()"
+            >
+              Export PDF
+            </button>
+            <button
+              class="btn btn-outline-danger btn-sm"
+              onclick="clearReport()"
+            >
+              Clear Report
+            </button>
+          </div>
         </div>
       </header>
       <div class="body flex-grow-1">
@@ -514,25 +597,14 @@
             <!-- Right Side: Dedicated Prominent Global Risk Score Card -->
             <div class="col-md-6 d-flex justify-content-md-end">
               <div
-                class="card border-start border-start-4 border-start-danger px-4 py-3 shadow-sm animate__animated animate__fadeIn"
-                style="
-                  transform: scale(1.05);
-                  min-width: 250px;
-                  background-color: #fdf2f2;
-                  z-index: 2;
-                "
+                class="card border-start border-start-4 px-4 py-3 shadow-sm animate__animated animate__fadeIn"
+                id="global-risk-card"
+                style="transform: scale(1.05); min-width: 250px; z-index: 2"
               >
-                <div
-                  class="text-danger small text-uppercase fw-bold tracking-wider"
-                >
+                <div class="small text-uppercase fw-bold tracking-wider">
                   Global Risk Score
                 </div>
-                <div
-                  class="fs-2 fw-bold text-danger mt-1"
-                  id="global-risk-score"
-                >
-                  0%
-                </div>
+                <div class="fs-2 fw-bold mt-1" id="global-risk-score">0%</div>
               </div>
             </div>
           </div>
@@ -604,7 +676,7 @@
           <!-- ⬆️ END OF METRICS ROW ⬆️ -->
 
           <!-- Upload Section -->
-          <div class="card mb-4">
+          <div class="card mb-4" id="upload-section">
             <div class="card-body">
               <h5 class="card-title">Upload Vulnerability Report</h5>
               <div class="input-group">

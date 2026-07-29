@@ -533,6 +533,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Update the Global Risk Score Card using your exact math formula percentage
     document.getElementById('global-risk-score').innerText = riskPercentage + '%';
+    updateRiskUI(riskPercentage);
 
     // Update Metadata (File Name & Live Timestamp) if a new file is uploaded
     if (fileName) {
@@ -565,3 +566,24 @@ document.getElementById('search-input').addEventListener('input', function (e) {
         }
     });
 });
+function updateRiskUI(score) {
+  const riskCard = document.getElementById('global-risk-card');
+  const riskScoreText = document.getElementById('global-risk-score');
+  
+  // Clear any existing border accent classes
+  riskCard.classList.remove('border-start-danger', 'border-start-warning', 'border-start-success');
+  
+  if (score >= 50) {
+    // High / Critical Risk: Red
+    riskCard.classList.add('border-start-danger');
+    riskScoreText.style.color = '#ef4444';
+  } else if (score > 0) {
+    // Medium / Low Risk: Amber/Yellow
+    riskCard.classList.add('border-start-warning');
+    riskScoreText.style.color = '#f59e0b';
+  } else {
+    // 0% / Clean: Green
+    riskCard.classList.add('border-start-success');
+    riskScoreText.style.color = '#10b981';
+  }
+}
