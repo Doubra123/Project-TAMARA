@@ -266,7 +266,74 @@ function getSeverityBadgeClass(severity) {
         default: return 'bg-secondary text-white';
     }
 }
-document.getElementById('vulnerabilityUpload').addEventListener('change', handleFileUpload);
+let selectedFile = null;
+
+// 1. Trigger Modal when a file is picked from the dashboard card
+document.getElementById('vulnerabilityUpload').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    selectedFile = file;
+
+    // Display file name & size inside the modal
+    document.getElementById('fileNameDisplay').textContent = `Selected File: ${file.name}`;
+    document.getElementById('fileSizeDisplay').textContent = `Size: ${(file.size / 1024).toFixed(2)} KB`;
+
+    // Reset UI state
+    document.getElementById('loadingArea').classList.add('d-none');
+    document.getElementById('filePreviewArea').classList.remove('d-none');
+    document.getElementById('processBtn').disabled = false;
+
+    // Show confirmation modal
+    const uploadModal = new bootstrap.Modal(document.getElementById('uploadModal'));
+    uploadModal.show();
+});
+// 2. Handle clicking "Process Scan File" inside the modal
+document.getElementById('processBtn').addEventListener('click', function() {
+    if (!selectedFile) return;
+
+    // Show loading spinner inside modal
+    document.getElementById('filePreviewArea').classList.add('d-none');
+    document.getElementById('loadingArea').classList.remove('d-none');
+    this.disabled = true;
+
+    // Simulate realistic parsing delay (1.5 seconds)
+    setTimeout(() => {
+        try {
+            // Mock an event object containing selectedFile and pass to main parser logic
+            const mockEvent = {
+                target: {
+                    files: [selectedFile]
+                }
+            };
+
+            // Call primary upload parser
+            if (typeof handleFileUpload === 'function') {
+                handleFileUpload(mockEvent);
+            } else {
+                console.error("handleFileUpload function was not found!");
+            }
+
+            // Hide modal on success
+            const modalElement = document.getElementById('uploadModal');
+            const modalInstance = bootstrap.Modal.getInstance(modalElement);
+            if (modalInstance) modalInstance.hide();
+
+            // Clear input field and reset modal state
+            document.getElementById('loadingArea').classList.add('d-none');
+            document.getElementById('filePreviewArea').classList.remove('d-none');
+            document.getElementById('processBtn').disabled = false;
+
+        } catch (error) {
+            console.error("Upload error details:", error);
+            alert('Error processing file. Check browser console for details.');
+            document.getElementById('loadingArea').classList.add('d-none');
+            document.getElementById('filePreviewArea').classList.remove('d-none');
+            document.getElementById('processBtn').disabled = false;
+        }
+    }, 1500);
+});
+
 window.addEventListener('load', () => {
     const savedName = localStorage.getItem('tamara_fileName');
     const savedVulns = localStorage.getItem('tamara_priorityVulns');
